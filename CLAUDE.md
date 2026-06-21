@@ -254,6 +254,23 @@ Form contexts include:
 
 ---
 
+## Identity & Logos
+
+The brand has 3 logo variants:
+
+- Primary (icon + text): Use in main UI areas like navbar and hero sections => D:\Workspace\personal\sierramar\sierramar-store\public\main-logo.png
+- Wordmark (text only): Use in compact layouts (headers, footers, dense UI) => D:\Workspace\personal\sierramar\sierramar-store\public\text-logo.png
+- Icon (symbol only): Use for favicon, mobile UI, loading states, and small components => D:\Workspace\personal\sierramar\sierramar-store\public\icon-logo.png
+
+### Rules
+
+- Use only one logo variant per UI section
+- Keep consistent alignment and spacing
+- Maintain a clean, minimal, premium presentation
+- Prefer SVG format for all variants
+
+---
+
 ## E-commerce & Catalog
 
 ### Main Sections
