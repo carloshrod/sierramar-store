@@ -1,7 +1,19 @@
+import { Hero } from "@/components/home/Hero";
+import { BestSellers } from "@/components/home/BestSellers";
+import { BrandStory } from "@/components/home/BrandStory";
+import { ProcessValues } from "@/components/home/ProcessValues";
+import { JournalTeaser } from "@/components/home/JournalTeaser";
+import { Newsletter } from "@/components/layout/Newsletter";
+
 export default function HomePage() {
   return (
-    <div className="px-6 py-16">
-      <h1 className="text-3xl font-serif">SierraMar</h1>
-    </div>
+    <>
+      <Hero />
+      <BestSellers />
+      <BrandStory />
+      <ProcessValues />
+      <JournalTeaser />
+      <Newsletter />
+    </>
   );
 }
