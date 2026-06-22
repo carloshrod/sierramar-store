@@ -41,7 +41,7 @@ export function Hero() {
             <Button
               size="lg"
               nativeButton={false}
-              render={<Link href="/products" />}
+              render={<Link href="/store" />}
             >
               Explorar la tienda
               <ArrowRight />
