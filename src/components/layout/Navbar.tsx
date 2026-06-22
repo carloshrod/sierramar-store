@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, ShoppingBag, User } from "lucide-react";
 import { Container } from "@/components/common/Container";
@@ -14,10 +17,31 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils/index";
+
+// Matches the header's own h-20 height: the scroll distance after which it
+// switches from transparent (at the top) back to its solid background.
+const NAVBAR_HEIGHT_PX = 80;
 
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY >= NAVBAR_HEIGHT_PX);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 bg-secondary/35 backdrop-blur-sm">
+    <header
+      className={cn(
+        "sticky top-0 z-40 transition-colors duration-300",
+        isScrolled ? "bg-secondary/35 backdrop-blur-sm" : "bg-transparent",
+      )}
+    >
       <Container className="flex h-20 items-center justify-between gap-6">
         <Logo variant="primary" priority className="h-10 w-auto sm:h-11" />
 
@@ -81,7 +105,7 @@ export function Navbar() {
 
               <SheetFooter className="gap-3 border-t border-border px-4 py-4">
                 <SheetClose
-                  render={<Link href="/products" />}
+                  render={<Link href="/store" />}
                   className={buttonVariants({ className: "h-10 w-full" })}
                 >
                   Comprar ahora

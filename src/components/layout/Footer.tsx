@@ -29,7 +29,7 @@ const SOCIAL_LINKS = [
 ];
 
 const SHOP_LINKS = [
-  { href: "/products", label: "Catálogo" },
+  { href: "/store", label: "Catálogo" },
   { href: "/account", label: "Mi cuenta" },
   { href: "/cart", label: "Carrito" },
 ];
@@ -37,7 +37,7 @@ const SHOP_LINKS = [
 const EXPLORE_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/historia", label: "Historia" },
-  { href: "/products", label: "Tienda" },
+  { href: "/store", label: "Tienda" },
   { href: "/blog", label: "Diario" },
 ];
 
