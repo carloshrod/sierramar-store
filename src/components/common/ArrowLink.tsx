@@ -6,12 +6,14 @@ interface ArrowLinkProps {
   href: string;
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
-export function ArrowLink({ href, children, className }: ArrowLinkProps) {
+export function ArrowLink({ href, children, className, onClick }: ArrowLinkProps) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         "group inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline",
         className,

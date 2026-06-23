@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, ShoppingBag, User } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Logo } from "@/components/common/Logo";
 import { NAV_LINKS } from "@/components/layout/nav-links";
+import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,13 +20,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils/index";
+import { useCartStore } from "@/store/useCartStore";
 
 // Matches the header's own h-20 height: the scroll distance after which it
 // switches from transparent (at the top) back to its solid background.
 const NAVBAR_HEIGHT_PX = 80;
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const openCart = useCartStore((state) => state.openCart);
+  const itemCount = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.quantity, 0),
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +42,17 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Cart is a focused, checkout-style page — strip the nav down to just the mark.
+  if (pathname === "/cart") {
+    return (
+      <header className="sticky top-0 z-40 border-b border-border bg-background">
+        <Container className="flex h-20 items-center justify-center">
+          <Logo variant="icon" priority className="h-10 w-auto" />
+        </Container>
+      </header>
+    );
+  }
 
   return (
     <header
@@ -68,12 +87,19 @@ export function Navbar() {
             <User />
           </Button>
           <Button
+            type="button"
             variant="ghost"
             size="icon"
-            nativeButton={false}
-            render={<Link href="/cart" aria-label="Carrito" />}
+            aria-label="Carrito"
+            className="relative"
+            onClick={openCart}
           >
             <ShoppingBag />
+            {itemCount > 0 && (
+              <Badge className="absolute -top-1 -right-1 size-4 justify-center p-0 text-[10px]">
+                {itemCount}
+              </Badge>
+            )}
           </Button>
           <Sheet>
             <SheetTrigger

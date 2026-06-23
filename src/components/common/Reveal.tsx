@@ -22,7 +22,12 @@ export function Reveal({ delay = 0, className, style, ...props }: RevealProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" },
+      // No bottom rootMargin shrinkage: combined with the pre-reveal
+      // translate-y-6, it pushed the intersection ratio of elements sitting
+      // just past the fold below the threshold, so they never fired on
+      // mount and stayed invisible until an unrelated scroll/resize nudged
+      // a recheck (see the `(shop)/cart` "Sigue comprando" section).
+      { threshold: 0.2 },
     );
 
     observer.observe(node);
