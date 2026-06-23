@@ -10,7 +10,13 @@ import { getBestSellers } from "@/lib/api/products";
 import { getStrapiMediaUrl } from "@/lib/utils/media";
 
 export async function BestSellers() {
-  const products = await getBestSellers(3);
+  // Decorative section: if Strapi is unreachable, hide it instead of taking
+  // down the whole home page (see `(shop)/error.tsx`, which would otherwise
+  // replace Hero/BrandStory/etc. too).
+  const products = await getBestSellers(3).catch((error) => {
+    console.error("No se pudieron cargar los más vendidos:", error);
+    return [];
+  });
 
   if (products.length === 0) return null;
 
