@@ -8,6 +8,7 @@ import { ProductGrid } from "@/components/shop/ProductGrid";
 import { ProductSort } from "@/components/shop/ProductSort";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/lib/hooks/useProducts";
+import { scrollToElement } from "@/lib/utils/scroll";
 import { sortProducts } from "@/lib/utils/product";
 import { useFilterStore } from "@/store/useFilterStore";
 import Image from "next/image";
@@ -29,18 +30,7 @@ export function StoreView() {
     [products, sort],
   );
 
-  const scrollToProducts = () => {
-    const section = document.getElementById(PRODUCTS_SECTION_ID);
-    if (!section) return;
-    const navbarHeight =
-      document.querySelector("header")?.getBoundingClientRect().height ?? 0;
-    const top =
-      section.getBoundingClientRect().top +
-      window.scrollY -
-      navbarHeight -
-      SCROLL_OFFSET_PX;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
+  const scrollToProducts = () => scrollToElement(PRODUCTS_SECTION_ID, SCROLL_OFFSET_PX);
 
   return (
     <div className="pb-12 sm:pb-16">
