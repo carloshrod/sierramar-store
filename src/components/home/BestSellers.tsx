@@ -41,12 +41,12 @@ export async function BestSellers() {
 
       <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
         {products.map((product, index) => (
-          <Reveal key={product.documentId} delay={index * 100}>
+          <Reveal key={product.documentId} delay={index * 100} className="h-full">
             <Link
               href={`/store/${product.slug}`}
-              className="group block overflow-hidden rounded-3xl bg-background shadow-sm ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:ring-primary/30"
+              className="group flex h-full flex-col overflow-hidden rounded-3xl bg-background shadow-sm ring-1 ring-border/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:ring-primary/30"
             >
-              <div className="relative flex h-64 items-center justify-center overflow-hidden bg-foreground">
+              <div className="relative flex h-64 shrink-0 items-center justify-center overflow-hidden bg-foreground">
                 {product.images?.[0] ? (
                   <Image
                     src={getStrapiMediaUrl(product.images[0].url)}
@@ -68,12 +68,12 @@ export async function BestSellers() {
                   {product.totalSold ? `${product.totalSold} vendidos` : product.roastLevel}
                 </Badge>
               </div>
-              <div className="space-y-3 p-7">
+              <div className="flex flex-1 flex-col gap-3 p-7">
                 <h3 className="font-serif text-2xl tracking-tight">{product.name}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {product.shortDescription}
                 </p>
-                <span className="inline-flex items-center gap-1.5 pt-1 text-sm font-medium">
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-1 text-sm font-medium">
                   Ver detalle
                   <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>

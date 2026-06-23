@@ -56,6 +56,7 @@ export interface Product {
   method: BrewMethod;
   roastLevel: RoastLevel;
   origin?: string;
+  altitude?: string;
   process: Process;
   tastingNotes?: string;
   isActive: boolean;
