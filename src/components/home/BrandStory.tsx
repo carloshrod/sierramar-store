@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowLink } from "@/components/common/ArrowLink";
 import { Reveal } from "@/components/common/Reveal";
 import { Section } from "@/components/common/Section";
+import { STRAPI_URL } from "@/lib/constants";
 
 export function BrandStory() {
   return (
@@ -9,7 +10,7 @@ export function BrandStory() {
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal className="h-72 overflow-hidden rounded-3xl ring-1 ring-background/15 sm:h-80 lg:h-104">
           <Image
-            src="https://images.unsplash.com/photo-1690983326252-ce6205fb7055?q=80&w=1260&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={`${STRAPI_URL}/uploads/photo_1722962883780_8806c3ab546b_3df88e0d02.jpeg`}
             alt="Valle de montaña verde al amanecer, paisaje de la sierra de SierraMar"
             width={1170}
             height={780}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HistoriaHero } from "@/components/historia/HistoriaHero";
 import { StorySection } from "@/components/historia/StorySection";
+import { STRAPI_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Nuestra historia — SierraMar",
@@ -22,7 +23,7 @@ export default function HistoriaPage() {
           "Empezamos visitando fincas pequeñas en busca de lotes con carácter propio, cafés que contaran algo del lugar donde crecieron. Esa búsqueda sigue siendo el corazón de todo lo que hacemos.",
         ]}
         image={{
-          src: "https://images.unsplash.com/photo-1586095516671-d085ff58cdd4?q=80&w=1260&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          src: `${STRAPI_URL}/uploads/Proyecto_nuevo_4_lrahav_861e7b8f84.webp`,
           alt: "Cerezas de café maduras entre el follaje verde",
         }}
         imagePosition="left"
@@ -36,7 +37,7 @@ export default function HistoriaPage() {
           "Cada bolsa lleva la altitud, el proceso y las notas de cata del lote que tienes en las manos, porque creemos que conocer el origen es parte de la experiencia.",
         ]}
         image={{
-          src: "https://images.unsplash.com/photo-1753837787691-84a06d715d24?q=80&w=1260&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          src: `${STRAPI_URL}/uploads/photo_1753837787691_84a06d715d24_a9150334ef.jpeg`,
           alt: "Granos de café recién tostados de cerca",
         }}
         imagePosition="right"
@@ -51,7 +52,7 @@ export default function HistoriaPage() {
           "Esto es apenas el comienzo de SierraMar. Gracias por ser parte de este recorrido, de la sierra al mar, una taza a la vez.",
         ]}
         image={{
-          src: "https://images.unsplash.com/photo-1708547347608-f30580b9a454?q=80&w=1260&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          src: `${STRAPI_URL}/uploads/Tayrona_1_8a758fa650.jpg`,
           alt: "Vista aérea de un atardecer sobre el mar",
         }}
         imagePosition="left"

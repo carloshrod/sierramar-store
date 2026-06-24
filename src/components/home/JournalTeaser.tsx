@@ -4,9 +4,9 @@ import { Reveal } from "@/components/common/Reveal";
 import { Section } from "@/components/common/Section";
 import { getLatestPost } from "@/lib/api/posts";
 import { getStrapiMediaUrl } from "@/lib/utils/media";
+import { STRAPI_URL } from "@/lib/constants";
 
-const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1587369403245-a10d1784662f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const FALLBACK_IMAGE = `${STRAPI_URL}/uploads/photo_1587369403245_a10d1784662f_e14244fd71.jpeg`;
 const FALLBACK_TITLE = "Historias detrás de cada taza";
 const FALLBACK_DESCRIPTION =
   "Notas de cata, guías de preparación e historias de origen para quienes quieren conocer el café más allá de la taza.";
@@ -25,7 +25,8 @@ export async function JournalTeaser() {
     ? getStrapiMediaUrl(post.featuredImage.url)
     : FALLBACK_IMAGE;
   const imageAlt =
-    post?.featuredImage?.alternativeText || "Notas y café del diario de SierraMar";
+    post?.featuredImage?.alternativeText ||
+    "Notas y café del diario de SierraMar";
 
   return (
     <Section tone="muted">

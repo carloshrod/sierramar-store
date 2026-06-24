@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/common/Container";
 import { Button } from "@/components/ui/button";
 import { scrollToElement } from "@/lib/utils/scroll";
+import { STRAPI_URL } from "@/lib/constants";
 
 const SCROLL_TARGET_ID = "el-origen";
 
@@ -14,7 +15,7 @@ export function HistoriaHero() {
   return (
     <div className="relative isolate overflow-hidden bg-foreground">
       <Image
-        src="https://images.unsplash.com/photo-1587369403245-a10d1784662f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={`${STRAPI_URL}/uploads/photo_1587369403245_a10d1784662f_e14244fd71.jpeg`}
         alt="Amanecer sobre una cordillera cubierta de niebla"
         fill
         priority

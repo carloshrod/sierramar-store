@@ -56,7 +56,10 @@ export function StorySection({
           <p key={index}>{paragraph}</p>
         ))}
         {cta && (
-          <ArrowLink href={cta.href} className={isDark ? "text-background" : "text-foreground"}>
+          <ArrowLink
+            href={cta.href}
+            className={isDark ? "text-background" : "text-foreground"}
+          >
             {cta.label}
           </ArrowLink>
         )}
