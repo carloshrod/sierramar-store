@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils/index";
 import { getStrapiMediaUrl } from "@/lib/utils/media";
-import type { StrapiMedia } from "@/lib/types/product";
+import type { StrapiMedia } from "@/lib/types/strapi";
 
 interface ProductGalleryProps {
   images: StrapiMedia[];

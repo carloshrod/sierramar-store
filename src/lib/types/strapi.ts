@@ -1,3 +1,11 @@
+export interface StrapiMedia {
+  id: number;
+  url: string;
+  alternativeText?: string | null;
+  width: number;
+  height: number;
+}
+
 export interface StrapiPagination {
   page: number;
   pageSize: number;

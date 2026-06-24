@@ -1,12 +1,5 @@
 import type { Category } from "@/lib/types/category";
-
-export interface StrapiMedia {
-  id: number;
-  url: string;
-  alternativeText?: string | null;
-  width: number;
-  height: number;
-}
+import type { StrapiMedia } from "@/lib/types/strapi";
 
 export const ROAST_LEVELS = ["Claro", "Medio", "Oscuro"] as const;
 export type RoastLevel = (typeof ROAST_LEVELS)[number];
