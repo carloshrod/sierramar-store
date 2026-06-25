@@ -10,6 +10,7 @@ interface CartState {
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (variantId: number) => void;
   updateQuantity: (variantId: number, quantity: number) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -45,6 +46,7 @@ export const useCartStore = create<CartState>()(
             item.variantId === variantId ? { ...item, quantity } : item,
           ),
         })),
+      clearCart: () => set({ items: [] }),
     }),
     {
       name: "sierramar-cart",

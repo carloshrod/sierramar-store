@@ -4,9 +4,18 @@ const strapiUrl = new URL(
   process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337",
 );
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL
+  ? new URL(process.env.NEXT_PUBLIC_APP_URL)
+  : null;
+
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  // Next.js blocks cross-origin requests to dev-only assets (_next/*, HMR)
+  // by default. When NEXT_PUBLIC_APP_URL points at a tunnel (ngrok) instead
+  // of localhost — needed to test MercadoPago's auto_return/webhook — that
+  // host has to be allowlisted or the page never hydrates client-side.
+  allowedDevOrigins: appUrl && appUrl.hostname !== "localhost" ? [appUrl.hostname] : undefined,
   images: {
     remotePatterns: [
       // Product/category media served by the Strapi CMS

@@ -17,7 +17,9 @@ export async function strapiFetch<T>(
   });
 
   if (!res.ok) {
-    throw new Error(`Strapi request failed: ${res.status} ${res.statusText}`);
+    const body = await res.json().catch(() => null);
+    const message = body?.error?.message as string | undefined;
+    throw new Error(message ?? `Strapi request failed: ${res.status} ${res.statusText}`);
   }
 
   return res.json() as Promise<StrapiResponse<T>>;

@@ -43,8 +43,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Cart is a focused, checkout-style page — strip the nav down to just the mark.
-  if (pathname === "/cart") {
+  // Cart and checkout are focused, checkout-style pages — strip the nav down to just the mark.
+  if (pathname === "/cart" || pathname === "/checkout" || pathname === "/checkout/success") {
     return (
       <header className="sticky top-0 z-40 border-b border-border bg-background">
         <Container className="flex h-20 items-center justify-center">
