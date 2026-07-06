@@ -4,6 +4,7 @@ import { checkoutSchema, type CheckoutFormValues } from "@/lib/schemas/checkout"
 import { getVariantsByIds } from "@/lib/api/product-variants";
 import { createOrder } from "@/lib/api/orders";
 import { createPreference } from "@/lib/mercadopago";
+import { getCurrentUser } from "@/lib/api/auth";
 import type { CartItem } from "@/lib/types/cart";
 import type { OrderItem } from "@/lib/types/order";
 
@@ -55,6 +56,7 @@ export async function submitCheckout(
   }
 
   const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+  const user = await getCurrentUser();
 
   let order;
   try {
@@ -62,6 +64,7 @@ export async function submitCheckout(
       customerName: parsed.data.customerName,
       customerEmail: parsed.data.customerEmail,
       customerPhone: parsed.data.customerPhone,
+      ...(user ? { customer: user.documentId } : {}),
       items,
       shippingAddress: parsed.data.shippingAddress,
       subtotal,

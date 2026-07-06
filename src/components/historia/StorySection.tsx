@@ -29,7 +29,13 @@ export function StorySection({
 
   const imageBlock = (
     <Reveal className="relative h-72 overflow-hidden rounded-3xl sm:h-80 lg:h-104">
-      <Image src={image.src} alt={image.alt} fill className="object-cover" />
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        className="object-cover"
+      />
     </Reveal>
   );
 

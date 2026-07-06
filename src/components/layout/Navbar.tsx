@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils/index";
 import { useCartStore } from "@/store/useCartStore";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
+import { useModalStore } from "@/store/useModalStore";
 
 // Matches the header's own h-20 height: the scroll distance after which it
 // switches from transparent (at the top) back to its solid background.
@@ -33,6 +35,8 @@ export function Navbar() {
   const itemCount = useCartStore((state) =>
     state.items.reduce((sum, item) => sum + item.quantity, 0),
   );
+  const { data: currentUser } = useCurrentUser();
+  const openModal = useModalStore((state) => state.openModal);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,15 +81,28 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden sm:inline-flex"
-            nativeButton={false}
-            render={<Link href="/account" aria-label="Mi cuenta" />}
-          >
-            <User />
-          </Button>
+          {currentUser ? (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden sm:inline-flex"
+              nativeButton={false}
+              render={<Link href="/account" aria-label="Mi cuenta" />}
+            >
+              <User />
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="hidden sm:inline-flex"
+              aria-label="Mi cuenta"
+              onClick={() => openModal("login")}
+            >
+              <User />
+            </Button>
+          )}
           <Button
             type="button"
             variant="ghost"
@@ -137,13 +154,23 @@ export function Navbar() {
                   Comprar ahora
                 </SheetClose>
                 <div className="flex items-center justify-center gap-8 text-sm">
-                  <SheetClose
-                    render={<Link href="/account" />}
-                    className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"
-                  >
-                    <User className="size-4" />
-                    Mi cuenta
-                  </SheetClose>
+                  {currentUser ? (
+                    <SheetClose
+                      render={<Link href="/account" />}
+                      className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      <User className="size-4" />
+                      Mi cuenta
+                    </SheetClose>
+                  ) : (
+                    <SheetClose
+                      render={<button type="button" onClick={() => openModal("login")} />}
+                      className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      <User className="size-4" />
+                      Mi cuenta
+                    </SheetClose>
+                  )}
                   <SheetClose
                     render={<Link href="/cart" />}
                     className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"

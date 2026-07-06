@@ -19,6 +19,7 @@ export function HistoriaHero() {
         alt="Amanecer sobre una cordillera cubierta de niebla"
         fill
         priority
+        sizes="100vw"
         className="object-cover"
       />
       <div className="absolute inset-0 bg-linear-to-t from-foreground via-foreground/70 to-foreground/20" />

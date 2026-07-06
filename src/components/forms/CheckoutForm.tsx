@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogIn } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,14 +13,34 @@ import { checkoutSchema, type CheckoutFormValues } from "@/lib/schemas/checkout"
 import { submitCheckout } from "@/lib/actions/checkout";
 import { formatPrice } from "@/lib/utils/price";
 import { useCartStore } from "@/store/useCartStore";
+import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
+import { useModalStore } from "@/store/useModalStore";
 
-export function CheckoutForm() {
+const EMPTY_SHIPPING_ADDRESS = {
+  fullName: "",
+  line1: "",
+  line2: "",
+  city: "",
+  state: "",
+  postalCode: "",
+  country: "Colombia",
+  phone: "",
+};
+
+interface CheckoutFormProps {
+  defaultValues?: Partial<CheckoutFormValues>;
+}
+
+export function CheckoutForm({ defaultValues }: CheckoutFormProps) {
   const items = useCartStore((state) => state.items);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const { data: currentUser } = useCurrentUser();
+  const openModal = useModalStore((state) => state.openModal);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -28,18 +48,26 @@ export function CheckoutForm() {
       customerName: "",
       customerEmail: "",
       customerPhone: "",
-      shippingAddress: {
-        fullName: "",
-        line1: "",
-        line2: "",
-        city: "",
-        state: "",
-        postalCode: "",
-        country: "Colombia",
-        phone: "",
-      },
+      ...defaultValues,
+      shippingAddress: { ...EMPTY_SHIPPING_ADDRESS, ...defaultValues?.shippingAddress },
     },
   });
+
+  // `defaultValues` only changes after a fresh server fetch (e.g. logging in
+  // from this same page via `router.refresh()` in LoginModal) — RHF only
+  // applies its `defaultValues` option once at mount, so this re-applies it
+  // when the prop actually updates afterwards.
+  useEffect(() => {
+    if (defaultValues) {
+      reset({
+        customerName: "",
+        customerEmail: "",
+        customerPhone: "",
+        ...defaultValues,
+        shippingAddress: { ...EMPTY_SHIPPING_ADDRESS, ...defaultValues.shippingAddress },
+      });
+    }
+  }, [defaultValues, reset]);
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -71,6 +99,23 @@ export function CheckoutForm() {
       className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px] lg:gap-12"
     >
       <div className="space-y-6">
+        {!currentUser && (
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-3xl bg-secondary/30 p-4 ring-1 ring-border/60 sm:px-6">
+            <p className="text-sm text-muted-foreground">
+              ¿Ya tienes cuenta? Inicia sesión para agilizar tu compra.
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => openModal("login")}
+            >
+              <LogIn />
+              Iniciar sesión
+            </Button>
+          </div>
+        )}
+
         <fieldset className="space-y-5 rounded-3xl bg-background p-6 ring-1 ring-border/60 sm:p-8">
           <legend className="flex items-center gap-3 font-serif text-xl tracking-tight">
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary font-sans text-sm font-semibold text-primary-foreground">

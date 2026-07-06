@@ -1,8 +1,10 @@
 import { create } from "zustand";
 
+export type ModalId = "login" | "set-password";
+
 interface ModalState {
-  activeModal: string | null;
-  openModal: (id: string) => void;
+  activeModal: ModalId | null;
+  openModal: (id: ModalId) => void;
   closeModal: () => void;
 }
 

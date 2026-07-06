@@ -11,21 +11,25 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 
 // Placeholders — reemplazar con los datos reales de la marca.
-const CONTACT_EMAIL = "hola@sierramar.com";
-const CONTACT_PHONE = "+52 55 0000 0000";
+const CONTACT_EMAIL = "contacto@sierramarstore.com";
+const CONTACT_PHONE = "312 7600789";
 
 const SOCIAL_LINKS = [
   {
-    href: "https://instagram.com/sierramar",
+    href: "https://instagram.com/sierramar.cafe",
     label: "Instagram",
     icon: InstagramIcon,
   },
   {
-    href: "https://facebook.com/sierramar",
+    href: "https://facebook.com/sierramar.cafe",
     label: "Facebook",
     icon: FacebookIcon,
   },
-  { href: "https://tiktok.com/@sierramar", label: "TikTok", icon: TikTokIcon },
+  {
+    href: "https://tiktok.com/@sierramar.cafe",
+    label: "TikTok",
+    icon: TikTokIcon,
+  },
 ];
 
 const SHOP_LINKS = [
@@ -154,6 +158,7 @@ export function Footer() {
                 alt="CHRod logo"
                 width={36}
                 height={28}
+                className="h-7 w-9"
               />
             </a>
           </span>

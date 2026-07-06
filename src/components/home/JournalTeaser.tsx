@@ -47,7 +47,13 @@ export async function JournalTeaser() {
         </Reveal>
 
         <Reveal className="relative h-72 overflow-hidden rounded-3xl sm:h-80 lg:h-96">
-          <Image src={image} alt={imageAlt} fill className="object-cover" />
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </Reveal>
       </div>
     </Section>

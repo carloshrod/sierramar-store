@@ -57,6 +57,8 @@ export interface CreateOrderInput {
   customerName: string;
   customerEmail: string;
   customerPhone?: string;
+  /** The logged-in user's documentId — omitted entirely for guest checkout. */
+  customer?: string;
   items: OrderItem[];
   shippingAddress: Address;
   subtotal: number;
