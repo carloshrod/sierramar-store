@@ -1,6 +1,6 @@
-# sierramar-store
+# Sierramar Store
 
-Frontend for **SierraMar Café**: a specialty coffee storefront and blog. Built with **Next.js 16** (App Router) and powered by [sierramar-cms](../sierramar-cms) (Strapi 5) over REST.
+Frontend for **SierraMar Café**: a specialty coffee storefront and blog. Built with **Next.js 16** (App Router) and powered by [sierramar-cms](https://github.com/carloshrod/sierramar-cms) (Strapi 5) over REST.
 
 ## Stack
 
